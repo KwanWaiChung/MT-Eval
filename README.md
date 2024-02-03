@@ -171,7 +171,7 @@ for task in tasks:
             "sys": "<str: System response>",
             "id": "<str: Turn ID>", 
             "inst": "<str: Instruction in user utterance>",
-            "do_inference": <bool: Indicate if inference is required>,
+            "do_inference": "<bool: Indicate if inference is required>",
         },
         {
           ...
