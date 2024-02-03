@@ -1,0 +1,13 @@
+paper/
+.vscode
+htmlcov/
+saved/
+wandb/
+__pycache__/
+.DS_Store
+log/
+raw_data/
+output/
+utils/api_keys.json
+figures/
+results/

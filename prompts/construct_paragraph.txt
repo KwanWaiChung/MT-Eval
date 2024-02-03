@@ -1,0 +1,22 @@
+### Instruction
+Compose a hypothetical {media} about {topic} in about 250-300 words. Draw upon your creativity to feature people, locations, and objects that do not exist in history.
+
+You can follow the below steps to write:
+1. **Imaginative Elements**: Incorporate fictional characters, settings, and items. Make sure they are original and not based on real historical entities.
+
+2. **Outline**: Sketch a brief outline to organize your thoughts and plot points.
+
+3. **Write Your Draft**: Begin writing your piece, adhering to your outline and staying within the word limit.
+
+4. **Revise and Edit**: After your first draft, revise for clarity, creativity, and flow. Check your grammar and spelling.
+
+5. **Finalize**: Prepare the final version of your piece, ensuring it is polished and engaging.
+
+Provide only the final version in your response.
+
+### Format
+Use the following format in your response:
+Topic: ...
+{content}
+
+### Output

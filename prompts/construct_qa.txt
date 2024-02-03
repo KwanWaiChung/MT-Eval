@@ -1,0 +1,14 @@
+### Content
+{Content}
+
+### Instruction
+- Create 10 challenging question and answer pairs to assess students' comprehension of the provided content. 
+- Ensure the questions are fact-based with specific answers derived from the content, avoiding any open-ended questions.
+- The answers must be short and concise. Just provide the keywords and do not give full sentences.
+
+### Format
+Structure your response as follows:
+Question: ...
+Answer: ...
+
+### Output

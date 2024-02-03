@@ -1,0 +1,18 @@
+Evaluate the response provided below to determine if it meets the specified constraints related to the following article. Provide an integer score from 1 to 10, taking into account its helpfulness, relevance and accuracy. Before giving your score, you should first provide a rationale to explain it. 
+
+Article to Evaluate Against:
+{content}
+
+Constraints:
+{constraints}
+
+Response to Evaluate:
+{response}
+
+The evaluation must be structured in the following JSON format:
+```json
+{
+  "Rationale": "<Explain the rationale of your score.>",
+  "Score": <An integer score from 1 to 10.>
+}
+```

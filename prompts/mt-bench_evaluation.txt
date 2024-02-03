@@ -1,0 +1,15 @@
+Evaluate the last response of the assistant in the conversation provided below to determine if it meets the specified constraints related to the following article. Provide an integer score from 1 to 10, taking into account its helpfulness, relevance, accuracy, depth, creativity, and level of detail of the assistant's response. For user queries that are related to word and sentence counts, you must use my provided counts to judge whether the response fulfills the requirement. Before giving your score, you should first provide a rationale to explain it. 
+
+Conversation:
+{conversation}
+
+Number of words in response: {num_words} 
+Number of sentences in response: {num_sent} 
+
+The evaluation must be structured in the following JSON format:
+```json
+{
+  "Rationale": "<Explain the rationale of your score.>",
+  "Score": <An integer score from 1 to 10.>
+}
+```

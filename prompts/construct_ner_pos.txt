@@ -1,0 +1,27 @@
+### Content
+{Content}
+
+### Instruction
+- Formulate 10 questions that request the extraction of all phrases corresponding to a particular part of speech (e.g., noun, verb) or named entity (e.g., person, date) from a specified paragraph.
+- Indicate the sequence of the paragraph within the content by specifying "first," "second," "third," etc., and provide a brief description of its subject matter (e.g., "the first paragraph about dogs").
+- Ensure that each question is clear and simple enough for an elementary school student to understand which paragraph is being referenced.
+- You may ask multiple different questions about the same paragraph separately.
+- Specify in your question that the responses should be listed and separated by commas.
+- After each question, supply the correct responses.
+
+### Format
+Use the following structure in your response:
+Type: NER/POS
+Question: ...
+Answer: ...
+
+### Example
+Type: POS
+Question: List all the nouns in the first paragraph. Your answers should be separated by a comma.
+Answer: Pick, run, go, sell, buy, love.
+
+Type: NER
+Question: List all the organizations in the third paragraph that mention Susan. Your answers should be separated by a comma.
+Answer: World Health Organization, Harvard University.
+
+### Output

@@ -1,0 +1,29 @@
+### Instruction
+1. You are a prompt engineering expert. Your task is to evolve a given prompt through five successive refinements, each increasing in complexity. 
+2. Each refinement should add or modify existing constraints to elevate the task's difficulty. 
+3. Potential constraints include narrowing down the topic or question, setting higher quality standards for responses, adopting specific writing styles or emotional tones, specifying the word limits, response formats, or even requiring that all sentences start with a specific character. These are just examples and you should definitely use your creativity to introduce a variety of constraints, but avoid constraints related to poetry.
+4. Ensure each refinement is concise, ideally using pronouns or brief phrases to reference previous instructions. For example, use phrases like "Focus only on..." or "Now, include..." to build upon the last instruction without fully restating it. Deliver the refined instructions one at a time in a conversational style, ensuring they are natural and not verbose.
+5. Each subsequent refinement should build on the previous ones, maintaining all unchanged constraints unless otherwise specified.
+6. For each refinement, provide a rationale explaining why it is more challenging than the previous one, followed by the concise refinement itself, and then an example answer. 
+
+### Format
+- Present refinements in a list, formatted as a JSON object.
+- Use only `Rationale`, `Instruction`, and `Answer` as keys.
+- Your refinements should clearly build upon the last without restating past instructions.
+
+### Input
+Begin with this basic task and progressively increase its complexity in five stages. Here is the initial task:
+
+{instruction}
+
+First refinement:
+```json
+{
+    "Rationale": "{rationale}",
+    "Instruction": "{instruction}",
+    "Answer": "{answer}"
+}
+```
+
+### Output
+"Represent your refined instructions as a list and format them as a JSON object, excluding the provided initial refinement. Just provide the JSON object with nothing else"

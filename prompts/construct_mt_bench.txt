@@ -1,0 +1,15 @@
+Formulate one extra conversation between a user and assistant where each user's question ideally links back to the previous relevant response from the assistant, fostering a layered and thoughtful conversation:
+
+### Dialogue
+{history}
+
+### Instruction
+In the following turns, the user's questions should aim to reference back to the previous assistant's responses, enhancing the interconnectedness of the dialogue while maintaining a coherent dialogue. Imagine if someone is reading your proposed question, he/she should not be able to understand it without reading the relevant Assistant's response. You should evolve the conversation around the topic of {topic}.
+
+### Format
+You should output the following JSON:
+{
+    "Rationale": <Explain how the user follows up the Assistant's response and which turn it is. Also, explain why it is related to {topic}>,
+    "User": <The user's instruction or question.>,
+    "Assistant": <The assistant's response.>
+}

@@ -1,0 +1,21 @@
+Evaluate the response provided below to determine if it meets the specified constraints related to the following article. Provide an integer score from 1 to 10, taking into account its helpfulness, relevance, accuracy, depth, creativity, and how well it conforms to the constraints. For constraints related to word and sentence counts, you must use my provided counts to judge whether the response fulfills the constraint. Before giving your score, you should first provide a rationale to explain it. 
+
+Article to Evaluate Against:
+{content}
+
+Response to Evaluate:
+{response}
+
+Number of words in response: {num_words} 
+Number of sentences in response: {num_sent} 
+
+Constraints:
+{constraints}
+
+The evaluation must be structured in the following JSON format:
+```json
+{
+  "Rationale": "<Explain the rationale of your score.>",
+  "Score": <An integer score from 1 to 10.>
+}
+```

@@ -1,0 +1,13 @@
+### Content
+{content}
+
+### Instruction
+- Read the provided text carefully and summarize it in no more than 150 words. 
+- Ensure that the summary is concise and coherent.
+- Just provide the summary without any further explanations or extra output.
+
+### Format
+Use the following structure in your response.
+Summary: ...
+
+### Output

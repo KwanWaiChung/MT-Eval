@@ -1,0 +1,25 @@
+### Content
+{Content}
+
+### Instruction
+- For each paragraph provided in the content section, write an instruction requesting its translation in Chinese. 
+- Accompany each instruction with the Chinese translation of that paragraph. 
+- Indicate the sequence of the paragraph within the content by specifying "first," "second," "third," etc., and provide a brief description of its subject matter (e.g., "the first paragraph about dogs").
+- Ensure that each question is clear and simple enough for an elementary school student to understand which paragraph is being referenced.
+
+### Format
+Use the following structure in your response:
+Instruction: ...
+Translation: ...
+
+### Example
+Instruction: Translate the first paragraph regarding apples in Chinese.
+Translation: ...
+
+Instruction: Translate the second paragraph that mentions Susan in Chinese.
+Translation: ...
+
+Instruction: Translate the third paragraph detailing the frightening incident in Chinese.
+Translation: ...
+
+### Output

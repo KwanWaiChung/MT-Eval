@@ -1,0 +1,28 @@
+### Content
+{Content}
+
+### Instruction
+- List all the relations of the types [based in, work for, located in, live in] among the entities [person, location, organization] in the given text and provide a reasonable explanation.
+- Only include the relations that were found in the context of the response.
+
+### Format
+Relation 1: (entity_1, relation, entity_2)
+Reason: ...
+
+Relation 2: (entity_1, relation, entity_2)
+Reason: ...
+
+### Example
+Relation 1: (Shi Liming, work for, Institute of Zoology)
+Reason: Shi Liming works for the Institute of Zoology.
+
+Relation 2: (Institute of Zoology, based In, Kunming)
+Reason: Institute of Zoology is an organization based in Kunming.
+
+Relation 3: (Rome, located in, Lazio)
+Reason: Rome is a place located in Lazio.
+
+Relation 4: (Jean Bertrand Aristide, live in, Haiti)
+Reason: Rome is a place located in Lazio.
+
+### Output
