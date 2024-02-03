@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Code%20License-MIT-green" alt="">
   <img src="https://img.shields.io/badge/python-3.10+-red" alt="">
 
+<br>
 <a href="https://arxiv.org/abs/2401.16745">
   <strong>📃 Paper</strong>
 </a>
@@ -23,28 +24,20 @@
 - [3\. Leaderboard](#leaderboard)
 - [4\. Setup](#setup)
 - [5\. Data](#data)
-
   - [5.1\. Load Data](#load_data)
   - [5.2\. Data Creation](#data_creation)
-
 - [6\. Inference](#inference)
-
   - [6.1\. Open-source Model Setup](#open_source_inference)
   - [6.2\. OpenAI Model Setup](#openai_inference)
   - [6.3\. Inference Script](#inference_script)
-
 - [7\. Ablation Study](#ablation)
-
   - [7.1\. Single-Turn Setting](#ablation_single_turn)
   - [7.2\. Gold Context Setting](#ablation_gold_context)
   - [7.3\. Classification With Various Contexts](#ablation_cls)
   - [7.4\. Irrelevant Context](#ablation_irrelevant)
-
 - [8\. Evaluation](#evaluation)
-
   - [8.1\. GPT-4 Evaluation](#gpt4_evaluation)
   - [8.2\. Calculate Score](#calculate_score)
-
 - [Citation](#citation)
 
 --------------------------------------------------------------------------------
@@ -251,7 +244,7 @@ Settings for models used in our paper (`vicuna-7b`, `vicuna-13b`, `llama2-chat-7
 
 For inference with OpenAI models, add your API keys to `utils/api_keys.json`:
 
-```json
+```
 [
   {
     "key": "<key1>"
