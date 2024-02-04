@@ -8,9 +8,9 @@ from utils.constants import INFERENCE_OUTPUT, EVALUATION_OUTPUT
 from nltk.tokenize import sent_tokenize
 from strictfire import StrictFire
 
-# from utils.openai_generate import generate
+from utils.openai_generate import generate
 
-from tests.mocks import openai_generate_evaluate_mock as generate
+# from tests.mocks import openai_generate_evaluate_mock as generate
 
 OUTPUT_FOLDER = "output"
 TASK_NAMES = [
