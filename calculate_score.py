@@ -1,5 +1,6 @@
 import sys
 
+
 sys.setrecursionlimit(12000 * 12000)
 from rouge import Rouge
 from strictfire import StrictFire
@@ -149,10 +150,14 @@ def _process_ner_pos_v1_3(data: List[Dict]) -> List[Dict]:
             for section in row["answers"][0].split(";"):
                 header, words = section.split(":", 1)
                 for word in words.split(","):
-                    new_ans.append((
-                        header.strip().lower(),
-                        _remove_punctuations_from_str(word).strip().lower(),
-                    ))
+                    new_ans.append(
+                        (
+                            header.strip().lower(),
+                            _remove_punctuations_from_str(word)
+                            .strip()
+                            .lower(),
+                        )
+                    )
             row["answers"] = new_ans
             if "gen_resp" in row:
                 new_resp = []
@@ -162,12 +167,14 @@ def _process_ner_pos_v1_3(data: List[Dict]) -> List[Dict]:
                             continue
                         header, words = section.split(":", 1)
                         for word in words.split(","):
-                            new_resp.append((
-                                header.strip().lower(),
-                                _remove_punctuations_from_str(word)
-                                .strip()
-                                .lower(),
-                            ))
+                            new_resp.append(
+                                (
+                                    header.strip().lower(),
+                                    _remove_punctuations_from_str(word)
+                                    .strip()
+                                    .lower(),
+                                )
+                            )
                 row["gen_resp"] = new_resp
         else:
             row["answers"] = [
@@ -202,97 +209,6 @@ def _process_mnds_new_retrieval(data: List[Dict]) -> List[Dict]:
             row["gen_resp"] = gen_resp
             row["answers"] = row["answers"][0].split(", ")
     return data
-
-
-ori_data = [
-    json.loads(row)
-    for row in open(
-        "/kfdata05/kf_grp/wckwan/Multi-Turn-Benchmark/our_data/global-inst_conv_v1.0.jsonl"
-    )
-]
-ori_data_map = {row["dialog_id"]: row for row in ori_data}
-ori_data = [
-    json.loads(row)
-    for row in open(
-        "/kfdata05/kf_grp/wckwan/Multi-Turn-Benchmark/our_data/global-inst-single_conv_v1.0.jsonl"
-    )
-]
-ori_data_map = dict(
-    {row["dialog_id"]: row for row in ori_data},
-    **ori_data_map,
-)
-
-
-def evaluate_recollection_global_inst(
-    data: List[Dict] = None, fn: str = None, count_last_turn_only: bool = True
-) -> float:
-    if (data is None and fn is None) or (data and fn):
-        raise ValueError("Either provide `data` or `fn`")
-    if fn:
-        if os.path.exists(fn):
-            data = [json.loads(row) for row in open(fn)]
-            return evaluate_recollection_global_inst(
-                data, count_last_turn_only=count_last_turn_only
-            )
-        else:
-            return 0
-
-    # sorted by session_i and turn_i
-    sorted_data = sorted(
-        data,
-        key=lambda x: (
-            int(x["dialog_id"].split("_")[0]),
-            int(x["dialog_id"].split("_")[-1]),
-        ),
-    )
-    # verify
-    max_turn = 1
-    session_score = {}
-    for row in sorted_data:
-        if "gen_resp" not in row:
-            continue
-        session_i, _, turn = row["dialog_id"].split("_")
-        session_i = int(session_i)
-        turn = int(turn)
-        max_turn = max(turn, max_turn)
-        if session_i not in session_score:
-            if count_last_turn_only:
-                session_score[session_i] = {
-                    "score": 0,
-                    "ended": False,
-                    "last_row": None,
-                }
-            else:
-                session_score[session_i] = {
-                    "score": [],
-                    "ended": False,
-                    "last_row": None,
-                }
-        if session_score[session_i]["ended"]:
-            continue
-        ori_row = ori_data_map[row["dialog_id"]]
-        if "prompt" in row:
-            assert ori_row["conv"][-1]["user"] in row["prompt"]
-        else:
-            assert ori_row["conv"][-1]["user"] in row["conv"][-1]["user"]
-        inst_obj = INSTRUCTIONS[ori_row["inst_name"]](**ori_row["inst_args"])
-        followed: bool = inst_obj.check_following(row["gen_resp"])
-        if count_last_turn_only:
-            if not followed:
-                session_score[session_i]["ended"] = True
-                session_score[session_i]["last_row"] = row
-            else:
-                session_score[session_i]["score"] = turn
-        else:
-            session_score[session_i]["score"].append(followed)
-    total_score = 0
-    for score in session_score.values():
-        if count_last_turn_only:
-            total_score += score["score"] / max_turn
-        else:
-            total_score += np.mean(score["score"])
-    total_score /= len(session_score) / 10
-    return total_score
 
 
 def highlight_max_scores_in_latex_table(
@@ -597,19 +513,23 @@ def evaluate_by_dict(
                 scores.setdefault(row["resp_turn_i"], []).append(score * 100)
             elif metric == "acc":
                 score = int(
-                    any([
-                        gen_resp.lower() == ans.lower()
-                        for ans in row["answers"]
-                    ])
+                    any(
+                        [
+                            gen_resp.lower() == ans.lower()
+                            for ans in row["answers"]
+                        ]
+                    )
                 )
                 row["score"] = score
                 scores.setdefault(row["resp_turn_i"], []).append(score * 100)
             elif metric == "qa_acc":
                 score = int(
-                    any([
-                        ans.lower().strip() in gen_resp.lower()
-                        for ans in row["answers"]
-                    ])
+                    any(
+                        [
+                            ans.lower().strip() in gen_resp.lower()
+                            for ans in row["answers"]
+                        ]
+                    )
                 )
                 row["score"] = score
                 scores.setdefault(row["resp_turn_i"], []).append(score * 100)
@@ -742,13 +662,15 @@ def extract_evaluation(
                     n_errors += 1
                     logger.error(e)
                 else:
-                    raw_results.append({
-                        "model": model,
-                        "task": task_name,
-                        "turn": row["turn"],
-                        "score": int(row["gen_resp"]["Score"]),
-                        "id": row["id"],
-                    })
+                    raw_results.append(
+                        {
+                            "model": model,
+                            "task": task_name,
+                            "turn": row["turn"],
+                            "score": int(row["gen_resp"]["Score"]),
+                            "id": row["id"],
+                        }
+                    )
     if n_errors > 0:
         logger.info(
             f"{n_errors} JSON decode error occurs with {fn}. Check"
@@ -799,13 +721,15 @@ def evaluate_recollection_cls():
                 else:
                     _id = f"{dial['id']}"
                 score = turn["sys"] in turn["gen_resp"]
-                raw_results.append({
-                    "model": model,
-                    "task": task_name,
-                    "turn": resp_turn_i,
-                    "score": int(score) * 10,
-                    "id": _id,
-                })
+                raw_results.append(
+                    {
+                        "model": model,
+                        "task": task_name,
+                        "turn": resp_turn_i,
+                        "score": int(score) * 10,
+                        "id": _id,
+                    }
+                )
     return raw_results
 
 
@@ -833,13 +757,15 @@ def evaluate_recollection_cls_ablation():
                 else:
                     _id = f"{dial['id']}"
                 score = turn["sys"] in turn["gen_resp"]
-                raw_results.append({
-                    "model": model,
-                    "task": task_name,
-                    "turn": resp_turn_i,
-                    "score": int(score) * 10,
-                    "id": _id,
-                })
+                raw_results.append(
+                    {
+                        "model": model,
+                        "task": task_name,
+                        "turn": resp_turn_i,
+                        "score": int(score) * 10,
+                        "id": _id,
+                    }
+                )
     return raw_results
 
 
@@ -866,13 +792,15 @@ def evaluate_recollection_global_inst():
                 else:
                     _id = f"{dial['id']}"
                 score: bool = inst_obj.check_following(turn["gen_resp"])
-                raw_results.append({
-                    "model": model,
-                    "task": task_name,
-                    "turn": resp_turn_i,
-                    "score": int(score) * 10,
-                    "id": _id,
-                })
+                raw_results.append(
+                    {
+                        "model": model,
+                        "task": task_name,
+                        "turn": resp_turn_i,
+                        "score": int(score) * 10,
+                        "id": _id,
+                    }
+                )
     return raw_results
 
 
@@ -908,14 +836,16 @@ def single_turn_vs_multi_turn(df: pd.DataFrame, tablefmt: str) -> str:
         columns=lambda x: " ".join([w.capitalize() for w in x.split("_")])
     )
     # reorder the columns
-    sub_df = sub_df[[
-        "Recollection Single",
-        "Recollection Multi",
-        "Expansion Single",
-        "Expansion Multi",
-        "Refinement Single",
-        "Refinement Multi",
-    ]]
+    sub_df = sub_df[
+        [
+            "Recollection Single",
+            "Recollection Multi",
+            "Expansion Single",
+            "Expansion Multi",
+            "Refinement Single",
+            "Refinement Multi",
+        ]
+    ]
     mt_avg = sub_df.loc[:, sub_df.columns.str.contains("Multi")].mean(axis=1)
     st_avg = sub_df.loc[:, sub_df.columns.str.contains("Single")].mean(axis=1)
     sub_df.insert(0, "Multi Avg.", mt_avg)
@@ -961,13 +891,15 @@ def cls_ablation(df: pd.DataFrame, tablefmt: str) -> str:
     sub_df = df[
         df["task"].str.contains("cls_ablation|recollection_single_cls")
     ]
-    sub_df.loc[:, "group"] = df["task"].map({
-        "cls_ablation_gold": "Gold",
-        "cls_ablation_sgc": "SGC",
-        "cls_ablation_dgc": "DGC",
-        "cls_ablation_rc": "RC",
-        "recollection_single_cls": "Single Turn",
-    })
+    sub_df.loc[:, "group"] = df["task"].map(
+        {
+            "cls_ablation_gold": "Gold",
+            "cls_ablation_sgc": "SGC",
+            "cls_ablation_dgc": "DGC",
+            "cls_ablation_rc": "RC",
+            "recollection_single_cls": "Single Turn",
+        }
+    )
     sub_df = sub_df.pivot_table(
         index="model", columns="group", values="score"
     ).rename_axis(index=None, columns="Model")
@@ -1042,7 +974,6 @@ def main():
     with open(table_filename, "w") as f:
         f.write(markdown_output)
     logger.info(f"The tables of results are saved to {table_filename}")
-
 
 
 if __name__ == "__main__":
