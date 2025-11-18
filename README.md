@@ -435,12 +435,27 @@ Scores for various tasks and settings will be saved in `results/result.md`.
 If you find our paper and resources useful, please consider citing our paper:
 
 ```bibtex
-@misc{kwan2024mteval,
-      title={MT-Eval: A Multi-Turn Capabilities Evaluation Benchmark for Large Language Models}, 
-      author={Wai-Chung Kwan and Xingshan Zeng and Yuxin Jiang and Yufei Wang and Liangyou Li and Lifeng Shang and Xin Jiang and Qun Liu and Kam-Fai Wong},
-      year={2024},
-      eprint={2401.16745},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+@inproceedings{kwan-etal-2024-mt,
+    title = "{MT}-Eval: A Multi-Turn Capabilities Evaluation Benchmark for Large Language Models",
+    author = "Kwan, Wai-Chung  and
+      Zeng, Xingshan  and
+      Jiang, Yuxin  and
+      Wang, Yufei  and
+      Li, Liangyou  and
+      Shang, Lifeng  and
+      Jiang, Xin  and
+      Liu, Qun  and
+      Wong, Kam-Fai",
+    editor = "Al-Onaizan, Yaser  and
+      Bansal, Mohit  and
+      Chen, Yun-Nung",
+    booktitle = "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing",
+    month = nov,
+    year = "2024",
+    address = "Miami, Florida, USA",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2024.emnlp-main.1124/",
+    doi = "10.18653/v1/2024.emnlp-main.1124",
+    pages = "20153--20177",
 }
 ```
